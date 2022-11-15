@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 export default class ClassLifeCycles extends Component {
     constructor(props) {
-        console.log("1 - Constructor called")
-        console.log("------------------------------------------")
-        super(props)
+        console.log("1 - Constructor called");
+        console.log("------------------------------------------");
+        super(props);
         this.state = {
             counter: 0,
         }
@@ -17,8 +17,8 @@ export default class ClassLifeCycles extends Component {
     *   Used to copy props to state
     */
     static getDerivedStateFromProps(props, state) {
-        console.log("2 - Get Derived State From Props")
-        console.log("------------------------------------------")
+        console.log("2 - Get Derived State From Props");
+        console.log("------------------------------------------");
         return {
             createError: props.createError,
         }
@@ -27,9 +27,21 @@ export default class ClassLifeCycles extends Component {
     /*
     *   UNSAFE_componentWillMount is deprecated. Use constructor/componentDidMount instead.
     */
+    /*
+        UNSAFE_componentWillMount() {
+            fetch("https://jsonplaceholder.typicode.com/todos/1")
+            .then(response => response.json())
+            .then(json => {
+                console.log("2 - UNSAFE_componentWillMount api called")
+                console.log("------------------------------------------")
+                console.log(json);
+            });
+        }
+    */
+
     componentDidMount() {
-        console.log("4 - Component Did Mount")
-        console.log("------------------------------------------")
+        console.log("4 - Component Did Mount");
+        console.log("------------------------------------------");
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -50,16 +62,21 @@ export default class ClassLifeCycles extends Component {
             }
         */
         console.log("Should Component Update from Child: true");
+        console.log("------------------------------------------");
         return true;
     }
 
     /*
     *   UNSAFE_componentWillUpdate is deprecated
         componentWillUpdate() {
-            console.log("4 - Component Will Update")
-            console.log("------------------------------------------")
+            console.log("4 - Component Will Update");
+            console.log("------------------------------------------");
         }
     */
+    UNSAFE_componentWillUpdate() {
+        console.log("4 - Component Will Update");
+        console.log("------------------------------------------");
+    }
 
     /*
         The getSnapshotBeforeUpdate() method is invoked just before the DOM is being rendered. 
@@ -68,8 +85,8 @@ export default class ClassLifeCycles extends Component {
         This function is always used along with the componentDidUpdate() method but vice-versa isn’t true.
     */
     getSnapshotBeforeUpdate(prevProps, prevState) {
-        console.log("Get Snapshot Before Update")
-        console.log("------------------------------------------")
+        console.log("Get Snapshot Before Update");
+        console.log("------------------------------------------");
         return prevState
     }
 
@@ -93,20 +110,20 @@ export default class ClassLifeCycles extends Component {
     *   This is a private method
     */
     _onDecrement = () => {
-        this.setState({ counter: this.state.counter - 1 })
+        this.setState({ counter: this.state.counter - 1 });
     }
 
     /*
     *   This is a private method
     */
     _handleError = () => {
-        this.setState({ error: null })
-        this.props.removeError()
+        this.setState({ error: null });
+        this.props.removeError();
     }
 
     render() {
-        console.log("3 - Render")
-        console.log("------------------------------------------")
+        console.log("3 - Render");
+        console.log("------------------------------------------");
 
         if (this.state.error) {
             return (
@@ -132,20 +149,20 @@ export default class ClassLifeCycles extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("5 - Component Did Update")
+        console.log("5 - Component Did Update");
         // console.log("Snapshot from getSnapshotBeforeUpdate: ", snapshot)
-        console.log("------------------------------------------")
+        console.log("------------------------------------------");
     }
 
     componentWillUnmount() {
-        console.log("6 - Component Will Unmount")
-        console.log("------------------------------------------")
+        console.log("6 - Component Will Unmount");
+        console.log("------------------------------------------");
     }
 
     componentDidCatch(error, info) {
-        console.log("7 - Component Did Catch")
-        console.log("------------------------------------------")
-        this.setState({ error, info })
+        console.log("7 - Component Did Catch");
+        console.log("------------------------------------------");
+        this.setState({ error, info });
     }
 }
 
